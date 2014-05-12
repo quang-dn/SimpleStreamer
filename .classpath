@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 8 [1.8.0_05]"/>
+	<classpathentry exported="true" kind="lib" path="/Users/thienphong/My Data/Thien Phong/Master Degree/Semester 2/COMP90015 - Distributed Systems/Project/Project 2/bridj-0.7-20130703.103049-42.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/thienphong/My Data/Thien Phong/Master Degree/Semester 2/COMP90015 - Distributed Systems/Project/Project 2/commons-codec-1.7(1).jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/thienphong/My Data/Thien Phong/Master Degree/Semester 2/COMP90015 - Distributed Systems/Project/Project 2/commons-io-2.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/thienphong/My Data/Thien Phong/Master Degree/Semester 2/COMP90015 - Distributed Systems/Project/Project 2/slf4j-api-1.7.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/thienphong/My Data/Thien Phong/Master Degree/Semester 2/COMP90015 - Distributed Systems/Project/Project 2/webcam-capture-0.3.10-RC4.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
