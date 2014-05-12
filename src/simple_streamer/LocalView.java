@@ -4,6 +4,10 @@ package simple_streamer;
  * Test comment - Ting
  */
 
+/*
+ * Another comment from Quang
+ */
+
 
 import javax.swing.JFrame;
 
