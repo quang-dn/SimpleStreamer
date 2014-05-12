@@ -3,6 +3,7 @@ package simple_streamer;
 import java.io.*;
 import java.net.*;
 
+
 public class ServerThread implements Runnable {
 
 	/*
@@ -24,13 +25,17 @@ public class ServerThread implements Runnable {
 				// Send JSON features message
 				PrintWriter toClient = new PrintWriter(
 						server.getOutputStream(), true);
+				
+				// TO BE CONSTRUCTED
 				String JSONMsg = "";
+		
 				toClient.print(JSONMsg);
 
 				// Receive client requests
 				BufferedReader fromClient = new BufferedReader(
 						new InputStreamReader(server.getInputStream()));
 				String clientMsg = fromClient.readLine();
+				
 			}
 		} catch (UnknownHostException ex) {
 			ex.printStackTrace();

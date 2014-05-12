@@ -1,14 +1,6 @@
 package simple_streamer;
 
-/*
- * Test comment - Ting
- * Another test comment - Ting
- */
-
-/*
- * Another comment from Quang
- */
-
+import java.io.IOException;
 
 import javax.swing.JFrame;
 
@@ -19,10 +11,79 @@ import com.github.sarxos.webcam.ds.buildin.natives.Device;
 import com.github.sarxos.webcam.ds.buildin.natives.DeviceList;
 import com.github.sarxos.webcam.ds.buildin.natives.OpenIMAJGrabber;
 
+import org.kohsuke.args4j.*;
+import static org.kohsuke.args4j.ExampleMode.ALL;
+
 public class EntryPoint {
 	
-	public static void main(String[] args) {
+	/*
+	 * Instance variables represent command line arguments
+	 */
+
+	// -sport argument
+	@Option(name = "-sport", required = false, 
+			usage = "Specify server port to set up connection", metaVar = "SPORT")
+	private int sport;
+
+	// -remote argument
+	@Option(name = "-remote", required = false, 
+			usage = "Specify the host name of remote server to connect to", metaVar = "HOSTNAME")
+	private String remoteHost;
+	
+	// -rport argument
+	@Option(name = "-rport", required = false, 
+			usage = "Specify the port of remote server to connect to", metaVar = "RPORT")
+	private int rport;
+	
+	// -rate argument
+	@Option(name = "-rate", required = false, 
+			usage = "Specify the rate limit", metaVar = "RATE")
+	private int rate;
+	
+	/**
+	 * This method provides convenient way to parse command line arguments
+	 * and validate them.
+	 * @param args Command line arguments array
+	 * @throws IOException
+	 */
+	public void parseArgs(String[] args) throws IOException {
+		CmdLineParser parser = new CmdLineParser(this);
+
+		try {
+			// parse the arguments.
+			parser.parseArgument(args);
+			
+			if (this.remoteHost != null) {
+				if (this.rport == 0) {
+					throw new CmdLineException(parser,"You have to specify port of remove server");
+				}
+			}
+			else if (this.rport > 0) {
+				if (this.remoteHost == null) {
+					throw new CmdLineException(parser,"You have to specify host name of remove server");
+				}
+			}
+
+		} catch (CmdLineException e) {
+			// Print error message
+			System.err.println(e.getMessage() + "\n");
+			System.err
+					.println("java -jar SimpleStreamer.jar [options...] arguments...");
+			// print the list of available options
+			parser.printUsage(System.err);
+			System.err.println();
+
+			// Print option sample
+			System.err.println(" Example: java -jar SimpleStreamer.jar"
+					+ parser.printExample(ALL));
+
+			System.exit(-1);
+		}
+	}
+	
+	public void localMode() {
 		
+		// Setup GUI Component
 		Viewer myViewer = new Viewer();
 		JFrame frame = new JFrame("Simple Stream Viewer");
 		frame.setVisible(true);
@@ -42,12 +103,12 @@ public class EntryPoint {
 			device = d;
 			break;
 		}
-
+		
 		boolean started = grabber.startSession(320, 240, 30, Pointer.pointerTo(device));
 		if (!started) {
 			throw new RuntimeException("Not able to start native grabber!");
 		}
-
+		
 		int n = 1000;
 		int i = 0;
 		do {
@@ -78,5 +139,14 @@ public class EntryPoint {
 		grabber.stopSession();
 	}
 	
+	public void remoteMode() {
+		
+	}
+	
+	public static void main(String[] args) throws IOException {
+		EntryPoint newEntry = new EntryPoint();
+		newEntry.parseArgs(args);
+		newEntry.localMode();
+	}
 
 }
